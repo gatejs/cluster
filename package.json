@@ -1,8 +1,8 @@
 {
-  "name": "fast-tcp",
-  "version": "3.3.2",
+  "name": "@gatejs/cluster",
+  "version": "4.0.0",
   "description": "fast-tcp is an extremely fast TCP client and server that allows to emit and listen to events",
-  "author": "Alejandro Santiago Nieto",
+  "author": ["Alejandro Santiago Nieto", "Michael Vergoz"],
   "license": "MIT",
   "dependencies": {
     "utjs": "2.x.x"
@@ -29,6 +29,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/alemures/fast-tcp.git"
+    "url": "https://github.com/gatejs/cluster.git"
   }
 }
