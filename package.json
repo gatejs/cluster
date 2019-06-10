@@ -2,17 +2,18 @@
   "name": "@gatejs/cluster",
   "version": "4.0.0",
   "description": "fast-tcp is an extremely fast TCP client and server that allows to emit and listen to events",
-  "author": ["Alejandro Santiago Nieto", "Michael Vergoz"],
+  "author": [
+    "Alejandro Santiago Nieto",
+    "Michael Vergoz"
+  ],
   "license": "MIT",
   "dependencies": {
+    "node-jen": "^1.1.0",
     "utjs": "2.x.x"
   },
   "devDependencies": {
-    "chai": "3.x.x",
-    "jscs": "3.x.x",
     "jsdoc": "3.x.x",
-    "jshint": "2.x.x",
-    "mocha": "3.x.x"
+    "mocha": "^6.1.4"
   },
   "main": "index.js",
   "files": [
@@ -21,9 +22,6 @@
   ],
   "scripts": {
     "test": "mocha test/*.js",
-    "jshint": "jshint index.js lib/*.js test/*.js examples/*.js",
-    "jscs": "jscs index.js lib/*.js test/*.js examples/*.js",
-    "jscs:fix": "jscs --fix index.js lib/*.js test/*.js examples/*.js",
     "check": "npm run test && npm run jshint && npm run jscs && npm outdated",
     "doc": "jsdoc ./lib/ ./package.json ./README.md -d ./doc"
   },
