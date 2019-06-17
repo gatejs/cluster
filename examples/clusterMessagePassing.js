@@ -35,19 +35,23 @@ for(var a=0; a<10; a++) {
 	sLocal.join("channel1");
 	var sHost1 = new Socket({host: 'localhost', port: 5001,	psk: preSharedKey});
 	var sHost2 = new Socket({host: 'localhost', port: 5002,	psk: preSharedKey});
-	//var sHost3 = new Socket({host: 'localhost', port: 5003,	psk: preSharedKey});
+	var sHost3 = new Socket({host: 'localhost', port: 5003,	psk: preSharedKey});
 	var sHost4 = new Socket({host: 'localhost', port: 5004,	psk: preSharedKey});
 	sHost4.join("channel1");
+
+	var sHost6 = new Socket({host: 'localhost', port: 5006,	psk: preSharedKey});
+	sHost6.join("channel1");
 }
 
 var sHost4 = new Socket({host: 'localhost', port: 5004,	psk: preSharedKey});
+/*
 sHost4.join("channel1");
 
 // late close one
 
 	sLocal.join("channel2");
 	sHost4.join("channel2");
-
+*/
 
 
 /*
@@ -98,19 +102,37 @@ setTimeout(() => {
 
 setTimeout(() => {
 	//sLocal.leave("channel2");
-	sHost4.leave("channel2");
+	//sHost4.leave("channel2");
 }, 2000)
 
 setTimeout(() => {
 	//console.log("host1", router1._best.graph)
 	//console.log("host1", router1._best.outgoing)
 	console.log("host1", router1.rooms)
-}, 3000)
+	console.log("host6", router6.rooms)
+}, 2000)
 
-sHost4.on('test', () => {
-	console.log("congratz");
+/*
+sHost3.on('test', (a,b,c,d) => {
+	console.log("host6", "congratz", a);
 })
+*/
+
+sLocal.on('test', (a) => {
+	console.log("sLocal", "congratz", a);
+})
+
+sHost6.on('test', (a) => {
+	console.log("host6", "congratz", a);
+})
+
+sHost3.on('test', (a) => {
+	console.log("host3", "congratz", a);
+})
+
 setInterval(() => {
-	sLocal.emit("test", "proute", {rooms: ['channel1']})
+	sHost3.emit("test", "proute", {rooms: ['channel1']})
+	//sHost2.emit("test", "haha", {rooms: ['channel3']})
+	sHost2.emit("test", "broadcast", {broadcast: true})
 }, 3000)
 // connect uplink from to
