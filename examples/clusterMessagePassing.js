@@ -1,4 +1,6 @@
 'use strict';
+const fs = require("fs")
+const PassThrough = require('stream').PassThrough;
 
 const Server = require('../index').Server;
 const Socket = require('../index').Socket;
@@ -30,7 +32,7 @@ const host6 = new Server({psk: preSharedKey});
 host6.listen(5006);
 
 // connect some node on each one
-for(var a=0; a<10; a++) {
+for(var a=0; a<5; a++) {
 	var sLocal = new Socket({host: 'localhost', port: 5000,	psk: preSharedKey});
 	sLocal.join("channel1");
 	var sHost1 = new Socket({host: 'localhost', port: 5001,	psk: preSharedKey});
@@ -39,8 +41,11 @@ for(var a=0; a<10; a++) {
 	var sHost4 = new Socket({host: 'localhost', port: 5004,	psk: preSharedKey});
 	sHost4.join("channel1");
 
+
 	var sHost6 = new Socket({host: 'localhost', port: 5006,	psk: preSharedKey});
+	var sHost6Bis = new Socket({host: 'localhost', port: 5006,	psk: preSharedKey});
 	sHost6.join("channel1");
+	sHost6Bis.join("channel1");
 }
 
 var sHost4 = new Socket({host: 'localhost', port: 5004,	psk: preSharedKey});
@@ -88,7 +93,7 @@ router5.addUplink(new Uplink({host: 'localhost', port: 5006, psk: preSharedKey})
 
 const router6 = new Router("host6");
 router6.addServer(host6);
-//router6.addUplink(new Uplink({host: 'localhost', port: 5001, psk: preSharedKey})) // host 1
+router6.addUplink(new Uplink({host: 'localhost', port: 5001, psk: preSharedKey})) // host 1
 
 // late close server
 setTimeout(() => {
@@ -122,7 +127,7 @@ sLocal.on('test', (a) => {
 	console.log("sLocal", "congratz", a);
 })
 
-sHost6.on('test', (a) => {
+host6.on('test', (a) => {
 	console.log("host6", "congratz", a);
 })
 
