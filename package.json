@@ -1,7 +1,7 @@
 {
   "name": "@gatejs/cluster",
   "version": "4.0.0",
-  "description": "fast-tcp is an extremely fast TCP client and server that allows to emit and listen to events",
+  "description": "Gatejs Cluster is an extremely fast TCP application clustering system that allows to emit and listen to events",
   "author": [
     "Alejandro Santiago Nieto",
     "Michael Vergoz"

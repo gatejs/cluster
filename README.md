@@ -1,39 +1,46 @@
-fast-tcp
+@gatejs/cluster
 ===
+Initially based on [fast-tcp](https://github.com/alemures/fast-tcp/)
 
+
+## About fast-tcp
 fast-tcp is an extremely fast TCP client and server that allows to emit and listen to events. It also provides more features like binary streaming, acknowledgements, broadcasts, rooms, etc.
 
 In order to get the maximum performance, every data type is sent using the fastest way to write it into the underline Buffer. Integer numbers are sent as signed integers of 48 bits, decimal numbers as double of 64 bits, boolean as byte, strings as utf8 string, buffers as binary, objects are serialized as binary and streams are transmitted in binary over the fast-tcp protocol.
 
 To be flexible sending objects, by default, they are serialized/deserialized using JSON.stringify/JSON.parse so, sending a Javascript object is possible out of the box. It is also possible to override the objects serialization so, you can use third-party libraries like Protocol Buffer, avro, MessagePack or even your own implementation.
 
-## Install
-npm install fast-tcp
+Initial code baseline [Alejandro Santiago](https://github.com/alemures)
 
-## Features
+## Install
+npm install @gatejs/cluster
+
+## Primitive Features
 * All primitive data types are supported (boolean, string, number, object, buffer)
 * Configurable client reconnection
 * Callbacks in message and stream reception (acknowledgements)
 * Broadcasts, rooms and client to client messages and streams
 * Configurable object serializer/deserializer (Protocol Buffer, avro, MessagePack, etc)
-* High performance binary streams over fast-tcp protocol
+* High performance binary streams over @gatejs/cluster protocol
 * AS FAST AS LIGHT!
 
-## Client Libraries
-* [fast-tcp-java](https://github.com/alemures/fast-tcp-java)
-* [fast-tcp-c](https://github.com/alemures/fast-tcp-c) - In development
+## Second Features
+* Cluster Uplinks
+* PSK (hmac/sha256) based authentification
+* Dijkstra path selection
+* Discovery & Droadcast Cluster messages
 
 ## Samples
 
 #### Simple socket-server
 ```javascript
-var Server = require('fast-tcp').Server;
-var Socket = require('fast-tcp').Socket;
+var Server = require('@gatejs/cluster').Server;
+var Socket = require('@gatejs/cluster').Socket;
 
 var server = new Server();
 server.on('connection', function (socket) {
-  socket.on('login', function (username) {
-    console.log('Trying to login: ' + username);
+  socket.on('hello', function (username) {
+    console.log('Trying to hello: ' + username);
   });
 });
 server.listen(5000);
@@ -42,7 +49,7 @@ var socket = new Socket({
   host: 'localhost',
   port: 5000
 });
-socket.emit('login', 'alejandro');
+socket.emit('hello', 'alejandro');
 ```
 
 #### Configurable client reconnection
@@ -58,13 +65,13 @@ var socket = new Socket({
 For messages:
 ```javascript
 server.on('connection', function (socket) {
-  socket.on('login', function (username, callback) {
+  socket.on('hello', function (username, callback) {
     callback(username === 'alejandro' ? true : false);
   });
 });
 
 // Client
-socket.emit('login', 'alejandro', function (response) {
+socket.emit('hello', 'alejandro', function (response) {
   console.log('Response: ' + response);
 });
 ```
@@ -177,7 +184,7 @@ var server = new Server({
 });
 
 server.on('connection', function (socket) {
-  socket.on('login', function (user) {
+  socket.on('hello', function (user) {
     console.log(user.getUsername() + '->' + user.getPassword());
   });
 });
@@ -190,7 +197,7 @@ var socket = new Socket({
   }
 });
 
-socket.emit('login', new User('alex', '1234'));
+socket.emit('hello', new User('alex', '1234'));
 ```
 
 #### High performance binary streams
@@ -209,4 +216,4 @@ fs.createReadStream('img.jpg').pipe(writeStream);
 Check out the folder `examples/` for more samples.
 
 ## jsdoc
-http://alemures.github.io/fast-tcp/
+http://alemures.github.io/@gatejs/cluster/
