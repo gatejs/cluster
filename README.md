@@ -28,7 +28,7 @@ npm install @gatejs/cluster
 * Cluster Uplinks
 * PSK (hmac/sha256) based authentification
 * Dijkstra path selection
-* Discovery & Droadcast Cluster messages
+* Discovery & Broadcast Cluster messages
 
 ## Samples
 

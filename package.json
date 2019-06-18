@@ -1,6 +1,6 @@
 {
   "name": "@gatejs/cluster",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Gatejs Cluster is an extremely fast TCP application clustering system that allows to emit and listen to events",
   "author": [
     "Alejandro Santiago Nieto",
