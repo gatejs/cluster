@@ -8,6 +8,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "debug": "^4.1.1",
     "node-dijkstra": "^2.5.0",
     "node-jen": "^1.1.0",
     "utjs": "2.x.x"
